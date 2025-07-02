@@ -7,9 +7,12 @@
 
 Below are sample screenshots of the application:
 
-![Input](assets\Screenshot 2025-07-01 203231.png)
+### 🖼️ Input Image
+![Input](assets/input.png)
 
-![Output](assets\Screenshot 2025-07-01 203312.png)
+### 🎨 Cartoonized Output
+![Output](assets/output.png)
+
 
 
 ### Application tested on:

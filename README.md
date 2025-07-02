@@ -1,13 +1,13 @@
-# Cartoon
+# Cartoonizer
 * This project refers to cartoonize a normal image or video
-* In this video can be upload upto 30sec in any size upto 100mb .there is a gpu version for doing the process faster but every device didnot contain a gpu so this project is fully capable of cpu acceleration so no bother about gpu.
-* Also image can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing 
+* In this video can be upload upto 60sec(1 MIN) in any size upto 100mb .there is a gpu version for doing the process faster but every device doesn't contain a gpu so this project is fully capable of cpu acceleration so don't bother about gpu.
+* Also image can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing or unit processing.
 
 ## 📸 Project Preview
 
 Below are sample screenshots of the application:
 
-### 🖼️ Input Image
+### 🖼️ UI Input Image
 ![Input](assets/input.png)
 
 ### 🎨 Cartoonized Output
@@ -17,7 +17,11 @@ Below are sample screenshots of the application:
 
 ### Application tested on:
 
-- python 3.9
+- python 3.9.0
+
+because new versions of python can't use library's like tensorflow ,open cv etc etc.
+
+python 3.9.0 is a stabled version so we can use this library's
 
 
 ### Using `venv`
@@ -26,7 +30,7 @@ Below are sample screenshots of the application:
 ```
 venv\Scripts\activate
 
-make sure the file location is correct the project is with in a folder (eg:cd C:\Project2025\cartoonize\cartoonize) 
+make sure the file location is correct the project is with in a folder  
 ```
 2. Install python dependencies
 ```
@@ -77,3 +81,6 @@ python app.py
 ### remember that the virtual environment (venv) is active  
 
 okay that's all happy coding  ^_^
+
+
+created by @sangeethsanthosh-git

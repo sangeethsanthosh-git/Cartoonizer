@@ -3,6 +3,15 @@
 * In this video can be upload upto 30sec in any size upto 100mb .there is a gpu version for doing the process faster but every device didnot contain a gpu so this project is fully capable of cpu acceleration so no bother about gpu.
 * Also image can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing 
 
+## 📸 Project Preview
+
+Below are sample screenshots of the application:
+
+![Input](assets\Screenshot 2025-07-01 203231.png)
+
+![Output](assets\Screenshot 2025-07-01 203312.png)
+
+
 ### Application tested on:
 
 - python 3.9

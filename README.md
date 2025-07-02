@@ -1,7 +1,7 @@
 # Cartoonizer
-* This project refers to cartoonize a normal image or video
+* This project refers to cartoonize a normal image or gifs or videos
 * In this video can be upload upto 60sec(1 MIN) in any size upto 100mb .there is a gpu version for doing the process faster but every device doesn't contain a gpu so this project is fully capable of cpu acceleration so don't bother about gpu.
-* Also image can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing or unit processing.
+* Also image and gifs can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing or unit processing.
 
 ## 📸 Project Preview
 

@@ -3,7 +3,7 @@ wheel==0.38.4
 absl-py==2.2.0
 algorithmia==2.0.5
 algorithmia-adk==1.2.4
-algorithmia-api-client==1.5.5
+algorithmia-api-client==1.5.1
 astor==0.8.1
 astunparse==1.6.3
 blinker==1.9.0

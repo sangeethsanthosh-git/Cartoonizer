@@ -1,4 +1,34 @@
+# Python
 __pycache__/
-.vscode/*
-static/uploaded_videos/*.mp4
-static/cartoonized_images/*.jpg
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments and local tooling
+.venv/
+venv/
+.sixth/
+.vscode/
+
+# Environment and local secrets
+.env
+.env.*
+algo.txt
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Flask runtime artifacts
+static/uploaded_images/
+static/uploaded_videos/
+static/cartoonized/
+static/cartoonized_images/
+static/cartoonized_outputs/
+static/uploads/
+
+# Local helper tools not part of the app
+git-filter-repo/

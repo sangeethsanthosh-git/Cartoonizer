@@ -28,7 +28,7 @@ if not opts['run_local']:
         raise Exception("GOOGLE_APPLICATION_CREDENTIALS not set in environment variables")
 
 app = Flask(__name__)
-app.secret_key = 'I m BaTmAn<>'
+app.secret_key = 'dfae483e4c927da4b3a8207bd24a5fbc'
 app.config['UPLOAD_FOLDER_VIDEOS'] = 'static/uploaded_videos'
 app.config['UPLOAD_FOLDER_IMAGES'] = 'static/uploaded_images'
 app.config['CARTOONIZED_FOLDER'] = 'static/cartoonized_outputs'
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         local_ip = socket.gethostbyname(hostname)
         url = f"http://{local_ip}:8080"
 
-        print(f"\nYour Flask app is running at: {url}\n")
+        print(f"\n📱 Your Flask app is running at: {url}\n")
 
         qr = qrcode.make(url)
         qr.show()

@@ -1,86 +1,99 @@
 # Cartoonizer
-* This project refers to cartoonize a normal image or gifs or videos
-* In this video can be upload upto 60sec(1 MIN) in any size upto 100mb .there is a gpu version for doing the process faster but every device doesn't contain a gpu so this project is fully capable of cpu acceleration so don't bother about gpu.
-* Also image and gifs can be cartoonize within sec but video convertion an take upto 1.5 to 3 min because of frame per frame cartoonzing or unit processing.
 
-## 📸 Project Preview
+## Abstract
 
-Below are sample screenshots of the application:
+Cartoonizer is a Flask-based web application that transforms uploaded media into a stylized cartoon look using a TensorFlow implementation of the White-box Cartoonization model. The project supports still images, animated GIFs, and short videos, handling preprocessing with Pillow and OpenCV before running inference and serving the result back through a simple browser UI. In practice, it works as a local-first demo for neural media stylization, with optional GPU acceleration and a partial cloud-storage path already scaffolded in the code.
 
-### 🖼️ UI Input Image
+## Preview
+
+### Input
 ![Input](assets/input.png)
 
-### 🎨 Cartoonized Output
+### Output
 ![Output](assets/output.png)
 
+## What The Project Does
 
+- Accepts uploads from a web page built with Flask and a single HTML template.
+- Cartoonizes static images such as `png`, `jpg`, `jpeg`, and `heic`.
+- Cartoonizes animated GIFs by processing frames and rebuilding the animation.
+- Cartoonizes videos such as `mp4`, `avi`, and `mov`, then exports a browser-friendly MP4 when possible.
+- Saves outputs locally by default and returns them for preview and download.
 
-### Application tested on:
+## How It Works
 
-- python 3.9.0
+1. The Flask app in `app.py` receives a user upload and saves it into a local `static/` folder.
+2. `WB_Cartoonize` in `white_box_cartoonizer/cartoonize.py` loads the pretrained model from `white_box_cartoonizer/saved_models/`.
+3. Images are resized, normalized, and sent through the cartoonization network.
+4. GIFs and videos are processed frame by frame before being written back to disk.
+5. The result is rendered in `templates/index_cartoonized.html` for preview and download.
 
-because new versions of python can't use library's like tensorflow ,open cv etc etc.
+## Tech Stack
 
-python 3.9.0 is a stabled version so we can use this library's
+- Python 3.9
+- Flask
+- TensorFlow 2.10 using `tf.compat.v1`
+- OpenCV
+- Pillow
+- NumPy
+- Tailwind CSS via CDN
 
+## Project Structure
 
-### Using `venv`
-
-1. Make a virtual environment using `venv` and activate it
+```text
+Cartoonizer/
+|-- app.py                           # Flask entry point and upload flow
+|-- config.yaml                      # Runtime flags such as local mode and GPU toggle
+|-- requirements.txt                 # Python dependencies
+|-- templates/
+|   `-- index_cartoonized.html       # Upload and results page
+|-- static/
+|   |-- uploaded_images/             # Temporary image uploads
+|   |-- uploaded_videos/             # Temporary video uploads
+|   `-- cartoonized_outputs/         # Generated outputs
+|-- white_box_cartoonizer/
+|   |-- cartoonize.py                # Inference wrapper for images, GIFs, and videos
+|   |-- network.py                   # Model architecture
+|   |-- guided_filter.py             # Guided filtering utilities
+|   `-- saved_models/                # Pretrained model checkpoints
+`-- video_api.py                     # Older Algorithmia integration, separate from Flask flow
 ```
-venv\Scripts\activate
 
-make sure the file location is correct the project is with in a folder  
-```
-2. Install python dependencies
-```
+## Local Setup
+
+The codebase is currently best aligned with Python 3.9 and the pinned TensorFlow stack in `requirements.txt`.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-```
-3. Run the webapp. Be sure to set the appropriate values in `config.yaml` file before running the application.
-```
+pip install pillow-heif
 python app.py
 ```
-## Installation
 
-### you can use pip install -r requirements.txt for installing package or else this can use
+Then open `http://localhost:8080` in your browser. The app also tries to print a local network URL and generate a QR code when it starts.
 
-pip install absl-py algorithmia algorithmia-api-client astor astunparse cached-property cachetools certifi charset-normalizer clang click colorama Flask flask-ngrok flatbuffers gast google-api-core google-auth google-auth-oauthlib google-cloud-core google-cloud-storage google-pasta google-resumable-media googleapis-common-protos grpcio gunicorn h5py idna importlib-metadata itsdangerous Jinja2 keras Keras-Applications Keras-Preprocessing libclang Markdown MarkupSafe numpy oauthlib opencv-python opt-einsum packaging Pillow pip proto-plus protobuf pyasn1 pyasn1-modules python-dateutil PyYAML requests requests-oauthlib rsa scikit-video scipy setuptools six sk-video tensorboard tensorboard-data-server tensorboard-plugin-wit tensorflow tensorflow-cpu tensorflow-estimator tensorflow-intel tensorflow-io-gcs-filesystem termcolor tf-slim typing-extensions urllib3 Werkzeug wheel wrapt zipp
+## Configuration Notes
 
-### maybe after installation the project couldn't work it shows tensorflow error because of version inconsistancy so use following installing also 
+The main runtime flags live in `config.yaml`.
 
-1. pip uninstall -y tensorflow tensorflow-cpu tensorflow-intel protobuf
+- `run_local: true` keeps processing and file serving on the local machine.
+- `gpu: true` tells TensorFlow to use a detected GPU.
 
-2. pip list | findstr "tensorflow protobuf ml-dtypes tensorboard"
+Important notes:
 
-3. pip uninstall -y ml-dtypes tensorboard tensorboard-data-server tensorboard-plugin-wit tensorflow-estimator tensorflow-io-gcs-filesystem   
+- The current repository is set up for local use first. If you switch `run_local` to `false`, `app.py` expects Google Cloud helper code and credentials that are not included in this repository snapshot.
+- Some video-related keys in `config.yaml` appear to come from an older pipeline and are not fully used by the current Flask route.
 
-4. pip install tensorflow==2.10.0 protobuf==3.20.3 ml-dtypes==0.4.0 tensorboard==2.18.0    
+## Usage Notes
 
-5. pip uninstall -y tensorflow tensorboard protobuf 
+- The UI is designed around image, GIF, and short video uploads.
+- Video processing is noticeably slower than image processing because frames must be transformed one by one.
+- The page text mentions uploads up to about 100 MB and 60 seconds; treat that as the intended operating range for the current app.
+- HEIC support depends on `pillow-heif`, which is why it is installed separately above.
 
-6. pip uninstall -y tensorflow-estimator tensorboard protobuf    
+## Credits
 
-7. pip uninstall flask opencv-python pillow numpy tensorflow googleapis-common-protos -y
-
-8. pip install flask opencv-python pillow numpy==1.24.3 protobuf==3.20.3 googleapis-common-protos==1.69.2    
-
-9. pip install tensorflow-cpu==2.10.0 protobuf==3.19.6 tensorboard==2.10.1
-
-10. pip uninstall protobuf    
-
-11. pip install protobuf==3.20.3   
-
-12. pip uninstall protobuf googleapis-common-protos -y   
-
-13. pip install protobuf==3.19.6 googleapis-common-protos==1.56.4
-
-### after installing this may be error show in the problem section in vs code no problem because of catch of previous work don't worry after installing all just excute the program 
-
-python app.py
-
-### remember that the virtual environment (venv) is active  
-
-okay that's all happy coding  ^_^
-
-
-created by @sangeethsanthosh-git
+- White-box Cartoonization model adapted from the original work by SystemErrorWang.
+- TensorFlow 2 compatibility notes in the source reference adaptations from `steubk/White-box-Cartoonization`.
+- Repository authored by `@sangeethsanthosh-git`.

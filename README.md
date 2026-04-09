@@ -64,7 +64,7 @@ Cartoonizer/
 The codebase is currently best aligned with Python 3.9 and the pinned TensorFlow stack in `requirements.txt`.
 
 ```powershell
-python -m venv .venv
+py -3.9 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 pip install pillow-heif
